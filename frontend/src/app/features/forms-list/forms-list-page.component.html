@@ -1,0 +1,39 @@
+<section class="page">
+  <div class="page-header">
+    <h2>טפסים קיימים</h2>
+    <a class="btn primary" routerLink="/forms/new">+ טופס חדש</a>
+  </div>
+
+  @if (isLoading()) {
+    <p>טוען...</p>
+  } @else if (errorMessage()) {
+    <p class="error">{{ errorMessage() }}</p>
+  } @else if (forms().length === 0) {
+    <p>עדיין לא נוצרו טפסים. לחצו על "טופס חדש" כדי להתחיל.</p>
+  } @else {
+    <table class="forms-table">
+      <thead>
+        <tr>
+          <th>שם הטופס</th>
+          <th>נוצר על ידי</th>
+          <th>תאריך יצירה</th>
+          <th># שדות</th>
+          <th># שלבי אישור</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (form of forms(); track form.id) {
+          <tr>
+            <td>{{ form.name }}</td>
+            <td>{{ form.createdBy }}</td>
+            <td>{{ form.createdAt | date: 'dd/MM/yyyy HH:mm' }}</td>
+            <td>{{ form.fieldsCount }}</td>
+            <td>{{ form.approvalStepsCount }}</td>
+            <td><a [routerLink]="['/forms', form.id]">צפייה</a></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</section>

@@ -1,0 +1,46 @@
+<section class="page">
+  <a routerLink="/forms" class="back-link">&#8594; חזרה לרשימה</a>
+
+  @if (isLoading()) {
+    <p>טוען...</p>
+  } @else if (errorMessage()) {
+    <p class="error">{{ errorMessage() }}</p>
+  } @else {
+    @if (form(); as f) {
+      <h2>{{ f.name }}</h2>
+      <p class="meta">נוצר על ידי {{ f.createdBy }} · {{ f.createdAt | date: 'dd/MM/yyyy HH:mm' }}</p>
+
+      <h3>שדות הטופס</h3>
+      @if (f.fields.length === 0) {
+        <p>לא הוגדרו שדות.</p>
+      } @else {
+        <ol class="detail-list">
+          @for (field of f.fields; track field.id) {
+            <li>
+              <strong>{{ field.label }}</strong>
+              <span class="tag">{{ fieldTypeLabel(field.type) }}</span>
+              @if (field.isRequired) {
+                <span class="tag required">שדה חובה</span>
+              }
+            </li>
+          }
+        </ol>
+      }
+
+      <h3>מסלול אישורים</h3>
+      @if (f.approvalSteps.length === 0) {
+        <p>לא הוגדר מסלול אישורים.</p>
+      } @else {
+        <ol class="detail-list">
+          @for (step of f.approvalSteps; track step.id) {
+            <li>
+              <strong>שלב {{ step.stepOrder }}: {{ step.stepName }}</strong>
+              <div>מאשר: {{ step.approverIdentity }}</div>
+              <span class="tag">{{ approvalActionLabel(step.actionType) }}</span>
+            </li>
+          }
+        </ol>
+      }
+    }
+  }
+</section>

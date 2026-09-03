@@ -1,0 +1,109 @@
+<section class="page">
+  <h2>יצירת טופס חדש</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <!-- פרטי הטופס -->
+    <fieldset class="card">
+      <legend>פרטי הטופס</legend>
+
+      <label class="field">
+        <span>שם הטופס</span>
+        <input type="text" formControlName="name" placeholder="לדוגמה: בקשת חופשה" />
+      </label>
+
+      <label class="field">
+        <span>יוצר הטופס</span>
+        <input type="text" formControlName="createdBy" />
+      </label>
+    </fieldset>
+
+    <!-- בונה הטפסים -->
+    <fieldset class="card">
+      <legend>בונה הטפסים</legend>
+
+      <div class="toolbar">
+        <button type="button" class="btn" (click)="addField(fieldTypeText)">+ הוסף שדה טקסט</button>
+        <button type="button" class="btn" (click)="addField(fieldTypeDate)">+ הוסף שדה תאריך</button>
+        <button type="button" class="btn" (click)="addField(fieldTypeNumber)">+ הוסף שדה מספר</button>
+        <button type="button" class="btn" (click)="addField(fieldTypeCheckbox)">+ הוסף תיבת סימון</button>
+      </div>
+
+      @if (fields.length === 0) {
+        <p class="hint">טרם נוספו שדות. השתמשו בכפתורים למעלה כדי להוסיף שדות לטופס.</p>
+      }
+
+      <div formArrayName="fields" class="dynamic-list">
+        @for (fieldGroup of fields.controls; track fieldGroup; let i = $index) {
+          <div [formGroupName]="i" class="dynamic-item">
+            <span class="type-badge">{{ fieldTypeLabels[fieldGroup.controls.type.value] }}</span>
+
+            <label class="field grow">
+              <span>תווית השדה</span>
+              <input type="text" formControlName="label" placeholder="שם השדה שיוצג למשתמש" />
+            </label>
+
+            <label class="checkbox">
+              <input type="checkbox" formControlName="isRequired" />
+              <span>שדה חובה</span>
+            </label>
+
+            <button type="button" class="btn danger" (click)="removeField(i)">הסר</button>
+          </div>
+        }
+      </div>
+    </fieldset>
+
+    <!-- ניהול אבני דרך -->
+    <fieldset class="card">
+      <legend>ניהול אבני דרך (מסלול אישורים)</legend>
+
+      <div class="toolbar">
+        <button type="button" class="btn" (click)="addApprovalStep()">+ הוסף שלב אישור</button>
+      </div>
+
+      @if (approvalSteps.length === 0) {
+        <p class="hint">טרם נוספו שלבי אישור. יש להוסיף לפחות שלב אחד.</p>
+      }
+
+      <div formArrayName="approvalSteps" class="dynamic-list">
+        @for (stepGroup of approvalSteps.controls; track stepGroup; let i = $index) {
+          <div [formGroupName]="i" class="dynamic-item step-item">
+            <span class="type-badge">שלב {{ i + 1 }}</span>
+
+            <label class="field grow">
+              <span>שם השלב</span>
+              <input type="text" formControlName="stepName" placeholder="לדוגמה: אישור מנהל ישיר" />
+            </label>
+
+            <label class="field grow">
+              <span>זהות המאשר</span>
+              <input type="text" formControlName="approverIdentity" placeholder="שם / תפקיד / דוא&quot;ל" />
+            </label>
+
+            <label class="field">
+              <span>סוג הפעולה המותרת</span>
+              <select formControlName="actionType">
+                @for (action of approvalActionOptions; track action) {
+                  <option [value]="action">{{ approvalActionLabels[action] }}</option>
+                }
+              </select>
+            </label>
+
+            <button type="button" class="btn danger" (click)="removeApprovalStep(i)">הסר</button>
+          </div>
+        }
+      </div>
+    </fieldset>
+
+    @if (errorMessage()) {
+      <p class="error">{{ errorMessage() }}</p>
+    }
+
+    <div class="actions">
+      <a routerLink="/forms" class="btn">ביטול</a>
+      <button type="submit" class="btn primary" [disabled]="isSubmitting()">
+        {{ isSubmitting() ? 'שומר...' : 'שמירת הטופס' }}
+      </button>
+    </div>
+  </form>
+</section>
