@@ -1,0 +1,46 @@
+.back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.meta {
+  color: #6b7280;
+  margin-top: -0.5rem;
+}
+
+.error {
+  color: #b91c1c;
+}
+
+.detail-list {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.detail-list li {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 0.6rem 0.9rem;
+}
+
+.tag {
+  display: inline-block;
+  margin-inline-end: 0.4rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  background-color: #eef2ff;
+  color: #3730a3;
+  font-size: 0.8rem;
+}
+
+.tag.required {
+  background-color: #fef3c7;
+  color: #92400e;
+}

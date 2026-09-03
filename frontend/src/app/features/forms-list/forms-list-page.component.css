@@ -1,0 +1,43 @@
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.btn.primary {
+  background-color: #2563eb;
+  color: #fff;
+}
+
+.error {
+  color: #b91c1c;
+}
+
+.forms-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.forms-table th,
+.forms-table td {
+  text-align: right;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.forms-table th {
+  background-color: #f3f4f6;
+  font-weight: 600;
+}
