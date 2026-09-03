@@ -25,9 +25,6 @@ frontend/                 אפליקציית Angular 18 (standalone, ללא NgMo
     features/form-builder   מסך "יצירת טופס חדש" (בונה שדות + אבני דרך)
     features/forms-list     רשימת טפסים קיימים
     features/form-detail    צפייה בטופס שמור אחד
-
-docs/
-  ARCHITECTURE.md          תשתית לתשובות חלק 3 (תאורטי – ייענה בעל פה בהקלטה)
 ```
 
 השכבות בצד השרת תלויות בכיוון אחד בלבד: `Api → Infrastructure/Application → Domain`.
