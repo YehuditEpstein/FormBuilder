@@ -3,7 +3,7 @@
 אב-טיפוס (PoC) למערכת ליצירת טפסים ארגוניים והגדרת מסלול אישורים דינמי (אבני
 דרך) עבור כל טופס — כולל שמירה, שליפת רשימה ושליפת טופס בודד.
 
-**Stack:** Angular 18 (standalone components, Reactive Forms) · ASP.NET Core 8
+**Stack:** Angular 18 (standalone components, Reactive Forms) · ASP.NET Core 9
 Web API · EF Core + SQLite.
 
 ## ארכיטקטורה
